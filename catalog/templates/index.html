@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+          
+                <p>{{ username }}</p>
+                <!-- {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                      {% for message in messages %}
+                      <p> {{ message }}
+                      {% endfor %}
+                  {% endif %}
+                {% endwith %} -->
+                <div class="container-fluid text-center">    
+                <div class="row content">
+                <div class="col-sm-2 sidenav">
+                <br>
+                <h2>Category</h2><hr>
+                {% for category in categories %}
+                  <a href="{{ url_for('show_items_in_category', category_id=category.id) }}">
+                  </br>
+                  <p class = "menup">{{ category.name }}</p></a>
+                {% endfor %}
+                </div>
+                <div class="col-sm-8 text-left"> 
+             
+                </br>
+                <h2>Latest Items</h2><hr>
+                {% for item in items %}
+                  <a href="{{ url_for('view_item', item_id=item.id) }}"><p>{{ item.name }}</p></a>
+                {% endfor %}
+                <h2>Add Items</h2><hr>
+                {% if 'username' in session %}
+                <i><p class='username'>Logged in as {{ session.username }}</p></i>
+                 <a href="{{ url_for('add_category') }}"><button class="btn btn-link">Add Category</button></a>
+                 <a href="{{ url_for('add_item') }}"><button class="btn btn-link" style="margin-left: 10px;">Add Item</button><i> </br>
+                {% else %}
+                <p>You must be logged in to add items</p>
+                {% endif %}
+                
+
+{% endblock %}
+<footer> hello </footer>

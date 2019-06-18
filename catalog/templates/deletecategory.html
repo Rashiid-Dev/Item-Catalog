@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block title %}Delete Category{% endblock %}
+
+{% block content %}
+                <h1>Delete Category</h1>
+
+                    <h5>Are you sure you want to delete {{category.name}}?</h5>
+    
+                <form method="POST">
+                    <button type="submit" class="btn btn-link">Delete</button>
+                    <a href="{{ url_for('home') }}"><button type="button"class="btn btn-link" style="color:red">Cancel</button></a>
+                </form>
+
+{% endblock %}

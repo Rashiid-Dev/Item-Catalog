@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block title %}Add Category{% endblock %}
+
+{% block content %}
+    
+               <h1>Edit {{ category.name }}</h1>
+
+               <form name="new-category" method="POST">
+                
+                      <input name="name" type="text" class="form-control" required>
+            
+
+                    <button type="submit" class="btn btn-link"><i class="fas fa-save text-and-icon"></i>Submit</button>
+                    <a href="{{ url_for('home') }}">
+                        <button type="button" class="btn btn-link" style="color:red">Cancel</button>
+                    </a>
+                </form>
+{% endblock %}

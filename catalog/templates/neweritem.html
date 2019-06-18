@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block title %}Add Item{% endblock %}
+
+{% block content %}
+  
+               <h1>Add something to {{ category.name }}</h1>
+
+               <form method="POST">
+                  
+                      <label for="exampleFormControlInput1">Title</label>
+                      <input name="name" type="text" class="form-control" required>
+
+                      <label for="exampleFormControlTextarea1">Description</label>
+                      <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="5" required></textarea>
+    
+                    <button type="submit" class="btn btn-link">Submit</button>
+                    <a href="{{ url_for('show_items_in_category', category_id=category.id) }}"><button type="button" class="btn btn-link" style="color:red">Cancel</button></a>
+                  </form>
+{% endblock %}

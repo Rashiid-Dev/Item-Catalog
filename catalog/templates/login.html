@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+{% block title %}Login{% endblock %}
+{% block head %}
+
+  <!--LOAD PRE-REQUISITES FOR GOOGLE SIGN IN -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://apis.google.com/js/client:platform.js?onload=start" async defer></script>
+  <script>
+    function start() {
+      gapi.load('auth2', function() {
+        auth2 = gapi.auth2.init({
+          client_id: '5694911491-9gmkck9mhcdgf1qrsd920q54re0dgqps.apps.googleusercontent.com'
+        });
+      });
+    }
+  </script>
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+ 
+
+            <button class="btn btn-link" id="signinButton" type="button">Google SignIn</button>
+            <span class="g-signin"
+            data-scope="openid email"
+            data-clientid="5694911491-9gmkck9mhcdgf1qrsd920q54re0dgqps.apps.googleusercontent.com"
+            data-redirecturi="postmessage"
+            data-accesstype="offline"
+            data-cookiepolicy="single_host_origin"
+            data-callback="signInCallback"
+            data-approvalprompt="force">
+            </span>
+            <br><br>
+            <a class="btn btn-outline-primary" href="{{url_for('home')}}">Back to Main Page</a>
+
+</div>
+  
+
+  <div id="result"></div>
+  
+  <!-- (3) Add the below script before the ending </body> tag -->
+  
+  
+  <script>
+    $('#signinButton').click(function() {
+      function signInCallback(authResult){
+        if (authResult['code']){
+          $('#signinButton').attr('style', 'display: none');
+          $.ajax({
+            type: 'POST',
+            url: '/gconnect?state={{STATE}}',
+            headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+            },
+            contentType: 'application/octet-stream; charset=utf-8',
+            success:function(result){
+              $('#result').html('Login Successful!</br>'+ result + '</br>Redirecting...')
+                   setTimeout(function() {
+                    window.location.href = "/";
+                   }, 2000);
+            },
+            processData:false,
+            data:authResult['code']
+          });
+        } else{
+          // handle error
+          console.log('There was an error: ' + authResult['error']);
+          $('#result').html('Failed to make a server-side call. Check your configuration and console.');
+        }
+      }
+      auth2.grantOfflineAccess().then(signInCallback);
+    });
+  </script>
+
+{% endblock %}

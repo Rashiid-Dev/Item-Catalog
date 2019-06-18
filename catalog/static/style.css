@@ -1,0 +1,140 @@
+    body {
+     /*background-color: #ededed;*/
+     background: url("/static/background.jpg");
+    }
+    .username{
+      color:white;     
+    }
+    h5{
+      color:white;
+      letter-spacing: 4px;
+    }
+    .topsmall{
+      letter-spacing: 7px;
+      
+    }
+    .menup{
+      /*color: #fbff1e;*/
+      letter-spacing: 3px;
+      /*font-family: helvetica;*/
+      .menu-item {
+     background: #F0F0F0;
+     padding: 20px;
+      margin: 20px;
+       margin-left: -20px;
+}
+    }
+    h1{
+        
+        color: white;
+    }
+    h2{
+      color:white;
+      font-family: helvetica;
+      letter-spacing: 2.5px;
+    }
+    p {
+        color:white;
+    }
+    h6 {
+        color:white;
+    }
+
+    img {
+      border: 1px solid #ddd;
+      border-radius: 50%;
+      padding: 2px;
+      width: 30px;
+      margin-right: 10px;
+
+    }
+ /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 550px}
+    
+    /* Set gray background color and 100% height */
+/*  
+      .sidenav {
+      
+      background-color: #2137ff;
+      height: 100%;
+      /*border-radius: 12px;
+      background-blend-mode: multiply;
+      box-shadow:         3px 3px 5px 6px #ccc;
+       box-shadow:         inset 0 0 10px #000000;
+    }*/
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height:auto;} 
+    }
+
+    /* Remove the jumbotron's default bottom margin */ 
+     .jumbotron {
+     background: url("/static/top.jpg");
+     background-position: right;
+
+      margin-bottom: 0;
+
+    }
+    .jumboh1{
+      letter-spacing: 15px;
+      font-family:Chalkduster;
+      colour:grey;
+    }
+
+    .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: red;
+  box-shadow:         inset 0 0 10px #000000;
+
+}
+   
+  
+.btn-outline {
+    background-color: transparent;
+    color: inherit;
+    transition: all .5s;
+}
+
+.btn-primary.btn-outline {
+    color: #428bca;
+}
+
+.btn-success.btn-outline {
+    color: #5cb85c;
+}
+
+.btn-info.btn-outline {
+    color: #5bc0de;
+}
+
+.btn-warning.btn-outline {
+    color: #f0ad4e;
+}
+
+.btn-danger.btn-outline {
+    color: #d9534f;
+}
+
+.btn-primary.btn-outline:hover,
+.btn-success.btn-outline:hover,
+.btn-info.btn-outline:hover,
+.btn-warning.btn-outline:hover,
+.btn-danger.btn-outline:hover {
+    color: #fff;
+}
