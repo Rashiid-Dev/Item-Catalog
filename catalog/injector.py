@@ -13,7 +13,7 @@ session = DBSession()
 
 # Categories + User
 
-user1 = User(name='Abdirashiid Jama', email='rashiid.py@gmail.com', picture='https://s3-us-west-2.amazonaws.com/udacity-profiles/production/photo/11725718986-cf44cdee8b26f9140d331f7d6d75b52c.jpeg')
+user1 = User(name='Abdirashiid Jama', email='rashiid.py@gmail.com', picture='https://lh6.googleusercontent.com/-sVcI-LPVb-0/AAAAAAAAAAI/AAAAAAAAAAc/JfhLrXf4Po4/s96-c/photo.jpg')
 
 session.add(user1)
 session.commit()

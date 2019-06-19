@@ -126,7 +126,7 @@ def gconnect():
     params = {'access_token': credentials.access_token, 'alt': 'json'}
     answer = requests.get(userinfo_url, params=params)
 
-    data = answer.json
+    data = answer.json()
 
     login_session['username'] = data['name']
     login_session['picture'] = data['picture']
@@ -633,4 +633,4 @@ def categories_json():
 
 if __name__ == "__main__":
     app.secret_key = "Testkey" #os.urandom(24)
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=False)
