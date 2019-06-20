@@ -1,4 +1,4 @@
-# Item Catalog Projects
+# Item Catalog Project
 
 > Created By Abdirashiid Jama
 
@@ -9,9 +9,17 @@ This is a website where sport items are listed in a catalog. You can log in with
 ## To Run
 
 ### You will need:
-- Python2
-- Vagrant
-- VirtualBox
+- [Python2](https://www.python.org/)
+- [Vagrant](https://www.vagrantup.com/)
+- [VirtualBox](https://www.virtualbox.org/) or a Linux-based virtual machine
+- [Flask](http://flask.pocoo.org/)
+
+#### and dependencies:
+
+- oauth2client
+- SQLAlchemy
+- PostgreSQL
+- httlib2
 
 ### Getting Ready
 1. Install Vagrant And VirtualBox
@@ -24,6 +32,9 @@ This is a website where sport items are listed in a catalog. You can log in with
 ### Running the program
 
 5. type `cd /vagrant` to  navigate to shared folders
-6. run the database setup by running the command `python database_setup`
-7. then run `injector.py` to populate the database
-7. then type `python application.py` to run the application.
+6. to get all the dependencies run `pip install -r requirements.txt` 
+(if you get a `ERROR: Could not install packages` error, use the sudo command like this `sudo pip install -r requirements.txt`)
+7. then navigate to catalog project by typing `cd catalog`
+8. run the database setup by running the command `python database_setup`
+9. then run `python injector.py` to populate the database
+10. then type `python application.py` to run the application.
