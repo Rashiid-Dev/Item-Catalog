@@ -29,6 +29,7 @@ Session = sessionmaker(bind=engine)
 # Create a Session object.
 session = Session()
 
+
 @app.route('/show')
 def show():
     print(login_session)
@@ -37,10 +38,6 @@ def show():
 @app.route('/catalog/')
 @app.route('/catalog/items/')
 def home():
-    # login_session['username'] = 'Abdirashiid Jama'
-    # login_session['picture'] = 'https://s3-us-west-2.amazonaws.com/udacity-profiles/production/photo/11725718986-cf44cdee8b26f9140d331f7d6d75b52c.jpeg'
-    # login_session['email'] = 'rashiid.py@gmail.com'
-    # login_session['user_id'] = 1
     categories = session.query(Category).all()
     catitems = session.query(CatItem).all()
     # flash(login_session['username'])
@@ -58,12 +55,12 @@ def login():
         for x in range(32))
     login_session['state'] = state
     return render_template('login.html', STATE=state)
- 
+
 
 # Connect to the Google Sign-in oAuth method.
 @app.route('/gconnect', methods=['POST'])
 def gconnect():
- # Validate state token
+    #Validate state token
     if request.args.get('state') != login_session['state']:
         response = make_response(json.dumps('Invalid state parameter.'), 401)
         response.headers['Content-Type'] = 'application/json'
@@ -151,7 +148,6 @@ def gconnect():
     return output
 
 
-
 # Disconnect Google Account.
 def gdisconnect():
     """Disconnect the Google account of the current logged-in user."""
@@ -177,6 +173,7 @@ def gdisconnect():
             json.dumps('Failed to revoke token for given user.'), 400)
         response.headers['Content-Type'] = 'application/json'
         return response
+
 
 def createUser(login_session):
     DBSession = sessionmaker(bind=engine)
@@ -285,13 +282,11 @@ def create_user(login_session):
 
 def get_user_info(user_id):
 
-
     user = session.query(User).filter_by(id=user_id).one()
     return user
 
 
 def get_user_id(email):
-
 
     try:
         user = session.query(User).filter_by(email=email).one()
@@ -337,7 +332,6 @@ def add_category():
 @app.route("/catalog/item/new/", methods=['GET', 'POST'])
 def add_item():
 
-
     if 'username' not in login_session:
         flash("Please log in to continue.")
         return redirect(url_for('login'))
@@ -361,7 +355,7 @@ def add_item():
         return redirect(url_for('home'))
     else:
         items = session.query(CatItem).\
-                filter_by(user_id=login_session['user_id']).all()
+            filter_by(user_id=login_session['user_id']).all()
         categories = session.query(Category).\
             filter_by(user_id=login_session['user_id']).all()
         return render_template(
@@ -382,7 +376,8 @@ def add_item_by_category(category_id):
     elif request.method == 'POST':
         # Check if the item already exists in the database.
         # If it does, display an error.
-        item = session.query(CatItem).filter_by(name=request.form['name']).first()
+        item = session.query(CatItem).filter_by(
+            name=request.form['name']).first()
         if item:
             if item.name == request.form['name']:
                 flash('The item already exists')
@@ -415,7 +410,6 @@ def exists_item(item_id):
 # Check if the category exists in the database.
 def exists_category(category_id):
 
-
     category = session.query(Category).filter_by(id=category_id).first()
     if category is not None:
         return True
@@ -426,7 +420,6 @@ def exists_category(category_id):
 # View an item by its ID.
 @app.route('/catalog/item/<int:item_id>/')
 def view_item(item_id):
- 
 
     if exists_item(item_id):
         item = session.query(CatItem).filter_by(id=item_id).first()
@@ -447,7 +440,6 @@ def view_item(item_id):
 # Edit existing item.
 @app.route("/catalog/item/<int:item_id>/edit/", methods=['GET', 'POST'])
 def edit_item(item_id):
-
 
     if 'username' not in login_session:
         flash("Please log in.")
@@ -487,7 +479,6 @@ def edit_item(item_id):
 @app.route("/catalog/item/<int:item_id>/delete/", methods=['GET', 'POST'])
 def delete_item(item_id):
 
-
     if 'username' not in login_session:
         flash("Please log in to continue.")
         return redirect(url_for('login'))
@@ -514,7 +505,6 @@ def delete_item(item_id):
 @app.route('/catalog/category/<int:category_id>/items/')
 def show_items_in_category(category_id):
 
-
     if not exists_category(category_id):
         flash("We are unable to process your request right now.")
         return redirect(url_for('home'))
@@ -533,7 +523,6 @@ def show_items_in_category(category_id):
 @app.route('/catalog/category/<int:category_id>/edit/',
            methods=['GET', 'POST'])
 def edit_category(category_id):
-
 
     category = session.query(Category).filter_by(id=category_id).first()
 
@@ -567,7 +556,6 @@ def edit_category(category_id):
 @app.route('/catalog/category/<int:category_id>/delete/',
            methods=['GET', 'POST'])
 def delete_category(category_id):
-  
 
     category = session.query(Category).filter_by(id=category_id).first()
 
@@ -599,7 +587,6 @@ def delete_category(category_id):
 # Return JSON of all the items in the catalog.
 @app.route('/api/v1/catalog.json')
 def show_catalog_json():
- 
 
     items = session.query(CatItem).order_by(CatItem.id.desc())
     return jsonify(catalog=[i.serialize for i in items])
@@ -610,10 +597,9 @@ def show_catalog_json():
     '/api/v2/categories/<int:category_id>/item/<int:item_id>/JSON')
 def catalog_item_json(category_id, item_id):
 
-
     if exists_category(category_id) and exists_item(item_id):
         item = session.query(CatItem)\
-               .filter_by(id=item_id, category_id=category_id).first()
+            .filter_by(id=item_id, category_id=category_id).first()
         if item is not None:
             return jsonify(item=item.serialize)
         else:
@@ -628,11 +614,10 @@ def catalog_item_json(category_id, item_id):
 @app.route('/api/v2/categories/JSON')
 def categories_json():
 
-
     categories = session.query(Category).all()
     return jsonify(categories=[i.serialize for i in categories])
 
 
 if __name__ == "__main__":
-    app.secret_key = "Testkey" #os.urandom(24)
+    app.secret_key = "Testkey"  # os.urandom(24)
     app.run(host="0.0.0.0", port=5000, debug=False)
