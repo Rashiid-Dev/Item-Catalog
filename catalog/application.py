@@ -29,7 +29,9 @@ Session = sessionmaker(bind=engine)
 # Create a Session object.
 session = Session()
 
-
+@app.route('/show')
+def show():
+    print(login_session)
 # Redirect to login page.
 @app.route('/')
 @app.route('/catalog/')
@@ -226,9 +228,9 @@ def gdisconnect():
         del login_session['email']
         del login_session['picture']
         response = make_response(json.dumps('Disconnected.'), 200)
-        redirect('/regions')
+        redirect('/')
         flash("You have successfully logged out")
-        return redirect('/regions')
+        return redirect('/')
     else:
         # For whatever reason, the given token was invalid.
         response = make_response(
